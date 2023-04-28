@@ -1,0 +1,1 @@
+//TODO create a Schema of REACTION in the thought model as a subdocument
