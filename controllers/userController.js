@@ -35,11 +35,16 @@ module.exports = {
   async updateUser(req, res) {
     try {
       const user = await User.findOneAndUpdate(
-        { _id: req.params.id },
+        { _id: req.params.userId },
         { $set: req.body },
         { new: true }
       );
-      res.json(user);
+
+      if (!user) {
+        res.status(404).json({ message: "No user with this id!" });
+      }
+
+      res.json({ message: "Updated User!" });
     } catch {
       res.status(500).json(err);
     }
@@ -55,7 +60,7 @@ module.exports = {
       await Application.deleteMany({
         _id: { $in: user.thoughts },
       });
-      res.json({ message: "User and associated apps deleted!" });
+      res.json({ message: "User deleted!" });
     } catch (err) {
       res.status(500).json(err);
     }
