@@ -42,10 +42,10 @@ module.exports = {
 
       if (!user) {
         res.status(404).json({ message: "No user with this id!" });
+      } else {
+        res.json({ message: "Updated User!" });
       }
-
-      res.json({ message: "Updated User!" });
-    } catch {
+    } catch (err) {
       res.status(500).json(err);
     }
   },
